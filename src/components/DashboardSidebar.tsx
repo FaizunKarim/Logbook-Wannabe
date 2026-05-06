@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
 						alt="Logo"
 						className="h-6 w-6"
 					/>
-					<span className="font-bold">Lapor Pak</span>
+					<span className="font-bold">Logbook</span>
 				</div>
 				<Button
 					variant="ghost"
@@ -61,7 +61,7 @@ const DashboardSidebar = () => {
 						alt="Logo"
 						className="h-8 w-8"
 					/>
-					<span className="text-xl font-bold">Lapor Pak</span>
+					<span className="text-xl font-bold">Logbook</span>
 				</div>
 
 				{/* Navigation */}

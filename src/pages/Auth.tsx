@@ -163,7 +163,7 @@ const Auth = () => {
           <div className="flex justify-center">
             <div className="flex items-center gap-2 text-primary">
               <img src="/apple-touch-icon.png" alt="Logo" className="h-10 w-10" />
-              <span className="text-2xl font-bold">Lapor Pak</span>
+              <span className="text-2xl font-bold">Logbook</span>
             </div>
           </div>
           <CardTitle className="text-xl">Selamat Datang</CardTitle>
