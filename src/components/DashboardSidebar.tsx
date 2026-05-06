@@ -1,4 +1,4 @@
-import { Home, Bell, FileText, LogOut, Menu } from "lucide-react";
+import { Home, LogOut, Menu } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -6,9 +6,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const menuItems = [
-	{ title: "Beranda", url: "/dashboard", icon: Home },
-	{ title: "Notifikasi", url: "/dashboard/notifikasi", icon: Bell },
-	{ title: "Laporan Saya", url: "/dashboard/laporan-saya", icon: FileText },
+	{ title: "Logbook", url: "/dashboard", icon: Home },
 ];
 
 const DashboardSidebar = () => {
