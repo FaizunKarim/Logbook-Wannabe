@@ -23,9 +23,8 @@ interface Report {
   id: string;
   title: string;
   description: string;
-  category: string;
-  location: string | null;
-  image_url: string | null;
+  log_date: string;
+  file_url: string | null;
   status: string;
   created_at: string;
   user_id: string;
@@ -59,8 +58,6 @@ const Beranda = () => {
   const [newReport, setNewReport] = useState({
     title: "",
     description: "",
-    category: "",
-    location: "",
     log_date: new Date().toISOString().split('T')[0],
   });
   const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
@@ -126,7 +123,7 @@ const Beranda = () => {
 
 
   const handleCreateReport = async () => {
-    if (!newReport.title || !newReport.description || !newReport.category || !user) {
+    if (!newReport.title || !newReport.description || !user) {
       toast({
         title: "Validasi Gagal",
         description: "Mohon lengkapi semua field yang diperlukan",
@@ -168,8 +165,6 @@ const Beranda = () => {
       user_id: user.id,
       title: newReport.title,
       description: newReport.description,
-      category: newReport.category,
-      location: newReport.location || null,
       file_url: fileUrl,
       log_date: newReport.log_date,
     });
@@ -188,8 +183,6 @@ const Beranda = () => {
       setNewReport({ 
         title: "", 
         description: "", 
-        category: "", 
-        location: "",
         log_date: new Date().toISOString().split('T')[0]
       });
       setAttachmentFile(null);
@@ -348,7 +341,7 @@ const Beranda = () => {
               <Button 
                 className="w-full h-12 text-base font-semibold gap-2" 
                 onClick={handleCreateReport}
-                disabled={submitting || !newReport.title || !newReport.description || !newReport.category}
+                disabled={submitting || !newReport.title || !newReport.description}
               >
                 {submitting ? (
                   <>
