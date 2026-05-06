@@ -338,23 +338,23 @@ const Beranda = () => {
             
             {/* Footer */}
             <div className="p-6 border-t bg-muted/30">
-              <Button 
-                className="w-full h-12 text-base font-semibold gap-2" 
-                onClick={handleCreateReport}
-                disabled={submitting || !newReport.title || !newReport.description}
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Mengirim Laporan...
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-5 w-5" />
-                    Kirim Laporan
-                  </>
-                )}
-              </Button>
+                <Button 
+                  className="w-full h-12 text-base font-semibold gap-2" 
+                  onClick={handleCreateReport}
+                  disabled={submitting || !newReport.title || !newReport.description}
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Menyimpan Logbook...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5" />
+                      Simpan Logbook
+                    </>
+                  )}
+                </Button>
             </div>
           </DialogContent>
         </Dialog>
