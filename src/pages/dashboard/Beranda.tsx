@@ -61,6 +61,7 @@ const Beranda = () => {
     description: "",
     category: "",
     location: "",
+    log_date: new Date().toISOString().split('T')[0],
   });
   const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -170,12 +171,13 @@ const Beranda = () => {
       category: newReport.category,
       location: newReport.location || null,
       file_url: fileUrl,
+      log_date: newReport.log_date,
     });
 
     if (error) {
       toast({
         title: "Error",
-        description: "Gagal membuat laporan",
+        description: "Gagal menambahkan Logbook",
         variant: "destructive",
       });
     } else {
@@ -183,7 +185,13 @@ const Beranda = () => {
         title: "Berhasil",
         description: "Laporan berhasil dibuat",
       });
-      setNewReport({ title: "", description: "", category: "", location: "" });
+      setNewReport({ 
+        title: "", 
+        description: "", 
+        category: "", 
+        location: "",
+        log_date: new Date().toISOString().split('T')[0]
+      });
       setAttachmentFile(null);
       setIsDialogOpen(false);
       fetchReports();
@@ -222,21 +230,15 @@ const Beranda = () => {
           <DialogTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Buat Laporan
+              Buat Logbook
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-xl p-0 overflow-hidden">
             <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 border-b">
               <DialogHeader>
                 <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                  <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Plus className="h-5 w-5 text-primary" />
-                  </div>
-                  Buat Laporan Baru
+                  Buat Logbook Baru
                 </DialogTitle>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Bantu kami memperbaiki Negara dengan melaporkan masalah di sekitar Anda
-                </p>
               </DialogHeader>
             </div>
             
@@ -244,17 +246,31 @@ const Beranda = () => {
               {/* Title Input */}
               <div className="space-y-2">
                 <Label htmlFor="title" className="text-sm font-medium">
-                  Judul Laporan <span className="text-destructive">*</span>
+                  Judul<span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="title"
-                  placeholder="Contoh: Jalan berlubang di depan SPBU"
+                  placeholder="Contoh: Mengerjakan fitur scraping data untuk laporan"
                   value={newReport.title}
                   onChange={(e) => setNewReport({ ...newReport, title: e.target.value })}
                   className="h-11"
                 />
               </div>
 
+
+              {/* Tanggal Logbook */}
+              <div className="space-y-2">
+                <Label htmlFor="log_date" className="text-sm font-medium">
+                  Tanggal Logbook
+                </Label>
+                <Input
+                  id="log_date"
+                  type="date"
+                  value={newReport.log_date}
+                  onChange={(e) => setNewReport({ ...newReport, log_date: e.target.value })}
+                  className="h-11"
+                />
+              </div>
 
               {/* Description */}
               <div className="space-y-2">
@@ -263,7 +279,7 @@ const Beranda = () => {
                 </Label>
                 <Textarea
                   id="description"
-                  placeholder="Jelaskan detail masalah yang Anda temukan..."
+                  placeholder="Jelaskan detail logbook Anda..."
                   rows={3}
                   value={newReport.description}
                   onChange={(e) => setNewReport({ ...newReport, description: e.target.value })}
@@ -354,8 +370,8 @@ const Beranda = () => {
       {reports.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center">
-            <p className="text-muted-foreground">Belum ada laporan publik.</p>
-            <p className="text-sm text-muted-foreground mt-2">Jadilah yang pertama membuat laporan!</p>
+            <p className="text-muted-foreground">Belum ada Logbook</p>
+            <p className="text-sm text-muted-foreground mt-2">Tambahkan Logbook</p>
           </CardContent>
         </Card>
       ) : (
