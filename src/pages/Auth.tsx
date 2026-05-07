@@ -33,7 +33,7 @@ const Auth = () => {
         setIsCheckingRole(true);
         try {
           // Cek role admin dari app metadata user
-          const isAdmin = user.app_metadata?.role === 'admin';
+          const isAdmin = (user as any)?.app_metadata?.role === 'admin';
           
           if (isAdmin) {
             navigate("/admin");
