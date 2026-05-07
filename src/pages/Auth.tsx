@@ -32,14 +32,10 @@ const Auth = () => {
       if (user && !loading && !isCheckingRole) {
         setIsCheckingRole(true);
         try {
-          const { data } = await supabase
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", user.id)
-            .eq("role", "admin")
-            .maybeSingle();
+          // Cek role admin dari app metadata user
+          const isAdmin = user.app_metadata?.role === 'admin';
           
-          if (data) {
+          if (isAdmin) {
             navigate("/admin");
           } else {
             navigate("/dashboard");
