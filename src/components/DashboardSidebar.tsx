@@ -1,4 +1,4 @@
-import { Home, LogOut, Menu } from "lucide-react";
+import { Home, LogOut, Menu, User, Settings } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -7,12 +7,13 @@ import { useState } from "react";
 
 const menuItems = [
 	{ title: "Logbook", url: "/dashboard", icon: Home },
+	{ title: "Pengaturan", url: "/dashboard/settings", icon: Settings },
 ];
 
 const DashboardSidebar = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const { signOut } = useAuth();
+	const { user, signOut } = useAuth();
 	const [isCollapsed, setIsCollapsed] = useState(false);
 
 	const handleLogout = async () => {
@@ -61,6 +62,21 @@ const DashboardSidebar = () => {
 					/>
 					<span className="text-xl font-bold">Logbook</span>
 				</div>
+
+				{/* User Profile */}
+				{user && (
+					<div className="p-4 border-t border-primary-foreground/20">
+						<div className="flex items-center gap-3">
+							<div className="h-10 w-10 rounded-full bg-primary-foreground/20 flex items-center justify-center">
+								<User className="h-5 w-5" />
+							</div>
+							<div className="flex-1 min-w-0">
+								<p className="font-medium truncate">{user.user_metadata?.full_name || 'Pengguna'}</p>
+								<p className="text-xs opacity-70 truncate">{user.email}</p>
+							</div>
+						</div>
+					</div>
+				)}
 
 				{/* Navigation */}
 				<nav className="flex-1 p-4 space-y-2">
